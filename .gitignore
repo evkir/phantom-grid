@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+venv/
+.venv/
+env/
+
+# Data
+phantom_data.json
+phantom_grid.db
+phantom_grid.db-wal
+phantom_grid.db-shm
+data/
+
+# Certs (generated)
+certs/
+
+# Node (if dashboard is built separately)
+node_modules/
+.next/
+out/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Env
+.env
+.env.local

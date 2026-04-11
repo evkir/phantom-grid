@@ -1,0 +1,16 @@
+version: "3.9"
+
+services:
+  phantom-grid:
+    build: .
+    container_name: phantom-grid
+    ports:
+      - "9090:9090"      # HTTP
+      - "9443:9443"      # HTTPS
+      - "53:53/udp"      # DNS
+    volumes:
+      - ./data:/app/data
+    command: ["--port", "9090", "--https", "--dns", "--db", "/app/data/phantom_grid.db"]
+    restart: unless-stopped
+    cap_add:
+      - NET_ADMIN

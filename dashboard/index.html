@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Phantom Grid — OOB Collaborator</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body, #root { height: 100%; width: 100%; overflow: hidden; }
+    body { background: #05080d; }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.9/babel.min.js"></script>
+
+  <script type="text/babel" data-type="module">
+    // Minimal shim — pull hooks from React global
+    const { useState, useEffect, useCallback, useReducer, useRef } = React;
+
+    /* ═══════════════════════════════════════
+       Paste the contents of PhantomGrid.jsx
+       below this line (remove the import and
+       export default, use window.PhantomGrid
+       assignment at the bottom instead)
+       ═══════════════════════════════════════ */
+
+    // For quick start, load component via fetch or paste inline.
+    // See README.md for instructions.
+
+    function App() {
+      return React.createElement('div', {
+        style: {
+          height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center',
+          background: '#05080d', color: '#00ffaa', fontFamily: 'monospace', fontSize: 14,
+          flexDirection: 'column', gap: 12,
+        }
+      },
+        React.createElement('div', { style: { fontSize: 32 } }, '⬡'),
+        React.createElement('div', null, 'Phantom Grid'),
+        React.createElement('div', { style: { color: '#3d5565', fontSize: 11 } },
+          'Paste PhantomGrid.jsx contents here or use React project setup'
+        ),
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById('root')).render(React.createElement(App));
+  </script>
+</body>
+</html>
