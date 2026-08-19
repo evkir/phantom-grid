@@ -330,12 +330,14 @@ def capture_http(tid, extra=""):
     db = get_db()
     token = db.execute("SELECT id FROM tokens WHERE id = ?", (tid,)).fetchone()
 
+    proto = "HTTPS" if request.is_secure else "HTTP"
+
     if token:
         db.execute(
             """INSERT INTO interactions
                (id, token_id, type, time, source_ip, method, path, query, headers, body, content_type)
-               VALUES (?, ?, 'HTTP', ?, ?, ?, ?, ?, ?, ?, ?)""",
-            (ix_id, tid, now, source_ip, request.method,
+               VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+            (ix_id, tid, proto, now, source_ip, request.method,
              f"/{extra}" if extra else "/",
              request.query_string.decode("utf-8", errors="replace"),
              json.dumps(dict(request.headers)),
@@ -343,10 +345,9 @@ def capture_http(tid, extra=""):
              request.content_type or ""),
         )
         db.commit()
-        proto = "HTTPS" if request.is_secure else "HTTP"
         print(f"  [{proto}] ← {request.method} from {source_ip} → token {tid}")
     else:
-        print(f"  [HTTP] ← {request.method} from {source_ip} → unknown token {tid}")
+        print(f"  [{proto}] ← {request.method} from {source_ip} → unknown token {tid}")
 
     return Response("ok", status=200)
 
